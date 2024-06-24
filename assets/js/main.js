@@ -31,6 +31,7 @@ function handleSubmit(event) {
     addNewTask(formData.newTask);
     renderTodoList(tasks);
   }
+  newTaskForm.reset();
 }
 
 function handleCheckTask(index) {
@@ -75,6 +76,11 @@ function renderTasks(tasks) {
   }
 }
 
+function addNewTask(newTask) {
+  const id = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
+  tasks.push({ id, task: newTask, completed: false });
+}
+
 function renderTotalTasks(count) {
   totalTasks.innerHTML = count;
 }
@@ -87,11 +93,6 @@ function renderTodoList(tasks) {
   renderTasks(tasks);
   renderTotalTasks(tasks.length);
   renderCompletedTasks(tasks.filter((task) => task.completed).length);
-}
-
-function addNewTask(newTask) {
-  const id = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
-  tasks.push({ id, task: newTask, completed: false });
 }
 
 renderTodoList(tasks);
